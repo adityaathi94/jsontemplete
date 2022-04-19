@@ -1,0 +1,27 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "adls": {
+          "type": "string",
+          "defaultValue": "newtestsg",
+          "metadata": {
+            "description": "Name of the azure data lake storage account"
+          }
+      },
+      "container": {
+          "type": "string",
+          "defaultValue": "adls-neighborhood-mail",
+          "metadata": {
+            "description": "Name of the Storage Account container"
+          }
+      }
+  },
+    "resources": [  
+      {
+          "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+          "apiVersion": "2018-03-01-preview",
+          "name": "[concat(parameters('adls'),'/default/',parameters('container'))]"
+      }
+    ]
+  }
