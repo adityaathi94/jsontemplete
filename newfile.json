@@ -1,0 +1,63 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "StorageAccountName": {
+          "type": "string",
+          "defaultValue": "newtestsg", // change the 
+          "metadata": {
+            "description": "Name of the Storage Account"
+          }
+      },
+      "sap-int6000-landing": {
+          "type": "string",
+          "defaultValue": "sap-int6000-landing",
+          "metadata": {
+            "description": "Name of the Storage Account container"
+          }
+      },
+      "sap-reject": {
+        "type": "string",
+        "defaultValue": "sap-reject",
+        "metadata": {
+          "description": "Name of the Storage Account container"
+        }
+    },
+    "sap-error": {
+        "type": "string",
+        "defaultValue": "sap-error",
+        "metadata": {
+          "description": "Name of the Storage Account container"
+        }
+    },
+    "sap-archive": {
+        "type": "string",
+        "defaultValue": "sap-archive",
+        "metadata": {
+          "description": "Name of the Storage Account container"
+        }
+    }
+  },
+    "resources": [  
+      {
+          "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+          "apiVersion": "2018-03-01-preview",
+          "name": "[concat(parameters('StorageAccountName'),'/default/',parameters('sap-int6000-landing'))]"
+      },
+      {
+        "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+        "apiVersion": "2018-03-01-preview",
+        "name": "[concat(parameters('StorageAccountName'),'/default/',parameters('sap-reject'))]"
+    },
+    {
+        "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+        "apiVersion": "2018-03-01-preview",
+        "name": "[concat(parameters('StorageAccountName'),'/default/',parameters('sap-error'))]"
+    },
+    {
+        "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+        "apiVersion": "2018-03-01-preview",
+        "name": "[concat(parameters('StorageAccountName'),'/default/',parameters('sap-archive'))]"
+    }
+    ]
+  }
